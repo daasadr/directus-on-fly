@@ -1,0 +1,25 @@
+app = "directus-on-fly" # název aplikace na Fly.io
+
+[env]
+# Tady můžeš přidat environment proměnné, např. pro Directus
+
+[experimental]
+  auto_rollback = true
+
+[[services]]
+  internal_port = 8055
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    interval = 10000
+    timeout = 2000
+    grace_period = "10s"
+    restart_limit = 0
